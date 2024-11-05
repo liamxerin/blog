@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= category %> - Blog Posts</title>
+    <link rel="stylesheet" href="/category.css">
+</head>
+<body>
+    <%- include('./components/navbar') %>
+   <div class="cat-nav">
+        <h2>Categories</h2>
+        <ul class="category-list">
+            <li><a href="nutrition">Nutrition</a></li>
+            <li><a href="fitness">Fitness</a></li>
+            <li><a href="mental-health">Mental Health</a></li>
+            <li><a href="wellness">Wellness</a></li>
+            <li><a href="chronic-conditions">Chronic Conditions</a></li>
+            <li><a href="lifestyle">Lifestyle</a></li>
+            <li><a href="health-news">Health News</a></li>
+            <li><a href="personal-stories">Personal Stories</a></li>
+            <li><a href="expert-advice">Expert Advice</a></li>
+            <li><a href="product-reviews">Product Reviews</a></li>
+        </ul>
+    </div>
+  
+
+    <div class="category">
+       
+        <div class="categories">
+            <% if (message) { %>
+                <p><%= message %></p>
+            <% } else { %>
+                <% posts.forEach(post => { %>
+                    
+                        <div class="card">
+                            <% if (post.image) { %>
+                                <img src="/<%= post.image %>" alt="Image for <%= post.title %>" width="200">
+                            <% } %>
+                            <div class="card-content">
+                                <h3><%= post.title %></h3>
+                                <p><%= post.description || 'No description available' %></p>
+                                <a href="/blog/<%= post._id %>" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                   
+                <% }) %>
+            <% } %>
+                </div>
+    </div>
+</body>
+
+</html>

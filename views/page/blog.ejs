@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post ? post.title : "Blog Post" %></title>
+    <link rel="stylesheet" href="/blog.css">
+</head>
+<body>
+    <%- include('./components/navbar') %>
+    
+    <div class="blog-container">
+        <% if (message) { %>
+            <p class="message"><%= message %></p>
+        <% } else if (post) { %>
+            <div class="blog-post">
+                <% if (post.image) { %>
+                    <img src="/<%= post.image %>" alt="Image for <%= post.title %>" class="blog-image">
+                <% } %>
+                <h1 class="blog-title"><%= post.title %></h1>
+                <p class="blog-date">Published on <%= post.createdAt.toDateString() %></p>
+                <p></p>
+                <div class="blog-content">
+                    <% post.content.split('/').forEach(function(paragraph) { %>
+                        <p>
+                            <%- paragraph
+                                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text between ** **
+                                .replace(/\*(.*?)\*/g, '<em>$1</em>')             // Italic text between * *
+                                .trim() %>
+                        </p>
+                    <% }); %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

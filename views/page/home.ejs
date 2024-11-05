@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <%- include('./components/navbar') %>
+    
+    <!-- Headsection with main post -->
+    <div class="headsection">
+        <% if (mainPost) { %>
+            <div class="headpost">
+                <div class="headimage">
+                    <img src="/<%= mainPost.image %>" alt="Image for <%= mainPost.title %>" />
+                    <div class="headtext">
+                        <h3><%= mainPost.title %></h3>
+                        <p><%= mainPost.description || 'No description available.' %></p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+        <% } else { %>
+            <p>No main post found.</p>
+        <% } %>
+
+        <div class="category">
+            <h2>Categories</h2>
+            <ul class="category-list">
+                <li><a href="category/nutrition">Nutrition</a></li>
+                <li><a href="category/fitness">Fitness</a></li>
+                <li><a href="category/mentalhealth">Mental Health</a></li>
+                <li><a href="category/wellness">Wellness</a></li>
+                <li><a href="category/chronic-conditions">Chronic Conditions</a></li>
+                <li><a href="category/lifestyle">Lifestyle</a></li>
+                <li><a href="category/health-news">Health News</a></li>
+                <li><a href="category/personal-stories">Personal Stories</a></li>
+                <li><a href="category/expert-advice">Expert Advice</a></li>
+                <li><a href="category/product-reviews">Product Reviews</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Feature posts section -->
+    <h2 style="text-align: center;">Feature Posts</h2>
+    <div class="post">
+        <% if (featurePosts.length > 0) { %>
+            <% featurePosts.forEach(featurePost => { %>
+                <div class="card">
+                    <% if (featurePost.image) { %>
+                        <img src="/<%= featurePost.image %>" alt="Image for <%= featurePost.title %>" width="200">
+                    <% } %>
+                    <div class="card-content">
+                        <h3><%= featurePost.title %></h3>
+                        <p><%= featurePost.description || 'No description available.' %></p>
+                        <p><strong>Tags:</strong> <%= featurePost.tags.join(', ') %></p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>No feature posts found.</p>
+        <% } %>
+    </div>
+</body>
+</html>
