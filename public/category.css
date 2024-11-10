@@ -114,9 +114,9 @@ body{
 .cat-nav{
     position: static;
 }
-@media (max-width: 768px) {
+@media (max-width: 468px) {
     .card {
       
-        margin: 30px;
+        margin: -20px;
     }
 }

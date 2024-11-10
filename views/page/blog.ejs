@@ -33,5 +33,90 @@
             </div>
         <% } %>
     </div>
+    
+    <div class="comment-section">
+        
+        <button class= "commentButton" id="toggleCommentFormButton">Write a comment...</button>
+      <!-- Comment Form -->
+ <form class="comment-form" action="/comment" method="POST" id="commentForm">
+     <input type="hidden" name="postId" value="<%= post._id %>">
+    
+    <!-- Input container for chat-style look -->
+    <div class="input-container">
+        <textarea id="comment" name="comment" rows="1" required placeholder="Write a comment..."></textarea>
+        <button type="submit" class="send-button">
+            <i class="fa-solid fa-paper-plane"></i> <!-- Font Awesome icon for a send button -->
+        </button>
+    </div>
+</form>
+        <div class="comments-list">
+            <p><%= totalComments %> <%= commentLabel %></p>
+            <% if (post.comments && post.comments.length > 0) { %>
+                <% post.comments.forEach(function(comment) { %>
+                    <div class="comment">
+                        <div class="profile-picture">
+                            <img src="/profile1.jpg" alt="Profile Picture">
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                               
+                                <small class="comment-time" data-timestamp="<%= comment.createdAt %>"></small>
+                            </div>
+                            <p class="comment-text"><%= comment.text %></p>
+                        </div>
+                    </div>
+                    
+                   
+                <% }); %>
+            <% } else { %>
+                <p>No comments yet.</p>
+            <% } %>
+        </div>
+       
+
+
+        
+    </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const toggleButton = document.getElementById("toggleCommentFormButton");
+    const commentForm = document.getElementById("commentForm");
+
+    toggleButton.addEventListener("click", () => {
+        // Toggle the visibility of the comment form
+        if (commentForm.style.display === "none" || !commentForm.style.display) {
+            commentForm.style.display = "block";
+            toggleButton.textContent = "X";
+        } else {
+            commentForm.style.display = "none";
+            toggleButton.textContent = "Write a comment...";
+        }
+    });
+});
+// Convert timestamps to "time ago" format
+document.querySelectorAll('.comment-time').forEach((element) => {
+        const timestamp = new Date(element.getAttribute('data-timestamp'));
+        element.textContent = timeAgo(timestamp);
+    });
+
+    function timeAgo(date) {
+        const now = new Date();
+        const seconds = Math.floor((now - date) / 1000);
+
+        if (seconds < 60) return seconds === 1 ? "1s " : `${seconds} s `;
+        const minutes = Math.floor(seconds / 60);
+        if (minutes < 60) return minutes === 1 ? "1m " : `${minutes} m `;
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) return hours === 1 ? "1h " : `${hours} h `;
+        const days = Math.floor(hours / 24);
+        if (days < 7) return days === 1 ? "Yesterday" : `${days} d `;
+        const weeks = Math.floor(days / 7);
+        if (weeks < 5) return weeks === 1 ? "1 " : `${weeks} w`;
+        const months = Math.floor(days / 30);
+        if (months < 12) return months === 1 ? "1month" : `${months} months`;
+        const years = Math.floor(days / 365);
+        return years === 1 ? "1 year ago" : `${years} years ago`;
+    }
+</script>
 </html>

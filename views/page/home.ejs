@@ -18,7 +18,7 @@
                     <div class="headtext">
                         <h3><%= mainPost.title %></h3>
                         <p><%= mainPost.description || 'No description available.' %></p>
-                        <a href="#" class="read-more">Read More</a>
+                        <a href="/blog/<%= mainPost._id %>" class="read-more">Read More</a>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                         <h3><%= featurePost.title %></h3>
                         <p><%= featurePost.description || 'No description available.' %></p>
                         <p><strong>Tags:</strong> <%= featurePost.tags.join(', ') %></p>
-                        <a href="#" class="read-more">Read More</a>
+                        <a href="/blog/<%= featurePost._id %>" class="read-more">Read More</a>
                     </div>
                 </div>
             <% }) %>

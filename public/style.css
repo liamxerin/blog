@@ -345,3 +345,23 @@ main p{
   .upload-icon:hover {
     background-color: #357abd;
   }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  
+  .logout-button {
+    background-color: var(--accent-clr);
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: var(--accent-clr);
+    border-radius: 20px;
+  }
+  
+  .logout-button:hover{
+    background-color: #5e63ff;
+    cursor: pointer;
+  }
+  

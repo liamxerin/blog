@@ -36,14 +36,16 @@ const blogPostSchema = new mongoose.Schema({
     type: [String], // Array of strings, each tag separated by commas
     default: [],
   },
-  views: {
-    type: [String],
-    default: [],
-  },
-  comments: {
-    type: [String],
-    default: [],
-  },
+ 
+ viewCount:{
+  type: Number,
+  default :0
+ },
+
+ comments: [{ 
+  text: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now }
+}],
   postType:{
     type: String,
     required: true,
