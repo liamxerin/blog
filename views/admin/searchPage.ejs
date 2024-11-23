@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +8,13 @@
   <title>Dashboard</title>
   <link rel="stylesheet" href="../style.css">
   <script type="text/javascript" src="../app.js" defer></script>
- 
+  <link rel="stylesheet" href="../search.css">
+  <link rel="stylesheet" href="../post.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <style>
-  .success-alert {
+
+.success-alert {
     background-color: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
@@ -34,9 +38,19 @@
     font-size: 1.5rem;
     color: #28a745;
   }
+.post-status p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.status-label {
+  font-weight: bold;
+  color: #333;
+}
 </style>
 <body>
-  <nav id="sidebar">
+ <nav id="sidebar">
     <ul>
       <li>
         <span class="logo">Blog</span>
@@ -50,7 +64,7 @@
           <span>Home</span>
         </a>
       </li>
-      <li >
+      <li class="active">
         <a href="dashboard">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M520-640v-160q0-17 11.5-28.5T560-840h240q17 0 28.5 11.5T840-800v160q0 17-11.5 28.5T800-600H560q-17 0-28.5-11.5T520-640ZM120-480v-320q0-17 11.5-28.5T160-840h240q17 0 28.5 11.5T440-800v320q0 17-11.5 28.5T400-440H160q-17 0-28.5-11.5T120-480Zm400 320v-320q0-17 11.5-28.5T560-520h240q17 0 28.5 11.5T840-480v320q0 17-11.5 28.5T800-120H560q-17 0-28.5-11.5T520-160Zm-400 0v-160q0-17 11.5-28.5T160-360h240q17 0 28.5 11.5T440-320v160q0 17-11.5 28.5T400-120H160q-17 0-28.5-11.5T120-160Zm80-360h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></svg>
           <span>Dashboard</span>
@@ -64,8 +78,7 @@
         </button>
         <ul class="sub-menu">
           <div>
-          
-            <li class="active"><a href="postblog">PostBlog</a></li>
+            <li><a href="postblog">PostBlog</a></li>
             <li><a href="drafts">Drafts <span></span></a></li>
             <li><a href="#">Document</a></li>
             <li><a href="blogs">Blogs</a></li>
@@ -108,160 +121,62 @@
       </li>
       
     </ul>
-  </nav>
+</nav>
   <main>
-    <% if(message.length > 0) { %>
-      <div class="success-alert">
-        <span class="success-icon">✔️</span>
-        <p><%= message %></p>
-      </div>
-       <% } %>
-       <div class="form">
-        <div class="form-container">
-            <form class="blog-form" action="createPost" method="POST" enctype="multipart/form-data">
-                <h2>Create a New Blog Post</h2>
-    
-                <label for="title">Title</label>
-                <input type="text" id="title" name="title" value="title"  class="clear-on-focus">
-    
-                <label for="author">Author</label>
-                <input type="text" id="author" name="author" value="admin" class="clear-on-focus">  
-    
-                <div class="category-selector">
-                    <label for="categories">Select a Category:</label>
-                    <select id="categories" name="categories" class="clear-on-focus"  >
-                        <option value="">--Select a Category--</option>
-                        <option value="nutrition" selected >Nutrition</option>
-                        <option value="fitness">Fitness</option>
-                        <option value="mental-health">Mental Health</option>
-                        <option value="wellness">Wellness</option>
-                        <option value="chronic-conditions">Chronic Conditions</option>
-                        <option value="lifestyle">Lifestyle</option>
-                        <option value="health-news">Health News</option>
-                        <option value="personal-stories">Personal Stories</option>
-                        <option value="expert-advice">Expert Advice</option>
-                        <option value="product-reviews">Product Reviews</option>
-                    </select>
-                </div>
-    
-                <label for="image-upload" class="image-upload-container">
-                    <span class="upload-icon">+</span>
-                    <input type="file" id="image-upload" name="image" accept="image/*" >
-                </label>
-    
-                <label for="description">Description</label>
-                <textarea id="description" name="description" class="clear-on-focus" rows="3">Here is some description</textarea>
-                
-                <label for="content">Content</label>
-                <textarea id="content" name="content" rows="5" ></textarea>
-    
-                <label for="tags">Tags</label>
-                <input type="text" id="tags" name="tags"  class="clear-on-focus"placeholder="Enter tags separated by commas">
-    
-                <div class="category-selector">
-                    <label for="postType">Select a post type:</label>
-                    <select id="postType" name="postType" class="clear-on-focus" >
-                        <option value="">--Select a type--</option>
-                        <option value="main">Main</option>
-                        <option value="feature">Feature</option>
-                        <option value="normal" selected>Normal</option>
-                    </select>
-                </div>
-    
-                <div class="post-button">
-                  <button class="submit-button" type="submit" name="action" value="publish" onclick="setPublishing(true)">Publish</button>
-                  <button type="submit" class="submit-button" name="action" value="draft" onclick="setPublishing(false)">Save as Draft</button>
-                </div>
-            </form>
-        </div>
+    <div class="search-bar">
+      <form action="searchPage" method="GET">
+          <input type="text" placeholder="search page results.." name="search" value="<%= query %>">
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                <circle cx="10" cy="10" r="7" stroke="black" stroke-width="2" fill="none"/>
+                <line x1="14" y1="14" x2="20" y2="20" stroke="black" stroke-width="2"/>
+            </svg>
+        </button>
+      </form>
     </div>
-    <script>
-    let isPublishing = false;
-
-// Set the isPublishing flag based on the button clicked
-function setPublishing(publishing) {
-  isPublishing = publishing;
-}
-
-// Event listener to handle user leaving the page
-window.addEventListener('beforeunload', function (event) {
-  if (!isPublishing && isDataChanged()) {
-    saveDraftData();
-    const confirmationMessage = "Your changes are not saved. Do you really want to leave?";
-    event.returnValue = confirmationMessage;
-    return confirmationMessage; // Required for some browsers
-  }
-});
-
-// Check if any form data has been modified
-function isDataChanged() {
-  const { title, content, description } = collectFormData();
-  return title.trim() !== '' || content.trim() !== '' || description.trim() !== '';
-}
-
-// Collect form data from input fields
-function collectFormData() {
-  const title = document.getElementById('title')?.value || '';
-  const author = document.getElementById('author')?.value || '';
-  const category = document.getElementById('categories')?.value || '';
-  const image = document.getElementById('image-upload')?.files[0] || null;
-  const description = document.getElementById('description')?.value || '';
-  const content = document.getElementById('content')?.value || '';
-  const tags = document.getElementById('tags')?.value || '';
-  const postType = document.getElementById('postType')?.value || '';
-
-  return {
-    title,
-    author,
-    category,
-    image,
-    description,
-    content,
-    tags,
-    postType
-  };
-}
-
-// Save draft data to the server
-async function saveDraftData() {
-  const data = collectFormData();
-  const formData = new FormData();
-
-  // Append all fields to FormData
-  Object.keys(data).forEach((key) => {
-    if (data[key]) {
-      formData.append(key, data[key]);
-    }
-  });
-
-  try {
-    const response = await fetch('http://localhost:5000/admin/saveDraft', {
-      method: 'POST',
-      body: formData
-    });
-
-    if (!response.ok) {
-      throw new Error("Server error while saving draft");
-    }
-
-    const responseData = await response.json();
-    console.log('Draft saved successfully:', responseData);
-  } catch (error) {
-    console.error('Error saving draft:', error);
-  }
-}
-
-// Clear input values on focus
-document.addEventListener("DOMContentLoaded", function () {
-  const fieldsToClear = document.querySelectorAll(".clear-on-focus");
-  fieldsToClear.forEach((field) => {
-    field.addEventListener("focus", function () {
-      this.value = ""; // Clear value on focus
-    });
-  });
-});
-
-    </script>
-    </body>
-    </html>
+    <h2>Search Results:</h2>
+    <div class="post">
+        <% if (results.length > 0) { %>
+            
+            <% results.forEach(function(blog) { %>
+                <div class="card">
+                    <% if (blog.image) { %>
+                        <img src="/<%= blog.image %>" alt="Image for <%= blog.title %>" width="200">
+                    <% } %>
+                    <div class="card-content">
+                        <h3><%= blog.title %></h3>
+                        <p><%= blog.description || 'No description available.' %></p>
+                        <p><strong>Author:</strong> <%= blog.author || 'Unknown' %></p>
+                        <p>
+                            <strong>Status:</strong>
+                            <span class="<%= blog.status === 'draft' ? 'status-draft' : 'status-published' %>">
+                                <%= blog.status.charAt(0).toUpperCase() + blog.status.slice(1) %>
+                            </span>
+                        </p>
+                        <p><strong>Tags:</strong> <%= blog.tags && blog.tags.length > 0 ? blog.tags.join(', ') : 'No tags' %></p>
+                        <a href="/blog/<%= blog._id %>" class="read-more">Read More</a>
+                        <a href="updatePage/<%= blog._id %>" class="edit-button">
+                            <span><i class="fa-solid fa-pen-to-square"></i></span> Edit
+                        </a>
+                        <form action="/admin/deleteBlog/<%= blog._id %>?_method=DELETE" method="POST" class="delete-form" onsubmit="return confirmDelete(event)">
+                            <button type="submit" class="delete-button">
+                                <i class="fa-solid fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <% if (query) { %>
+                <p>No results found for "<%= query %>".</p>
+            <% } else { %>
+                <p>Enter a search term to begin.</p>
+            <% } %>
+        <% } %>
+    </div>
     
+        
+   
+  </main>
+</body>
+</html>

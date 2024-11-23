@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
   <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../post.css">
   <script type="text/javascript" src="../app.js" defer></script>
- 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<style>
-  .success-alert {
+
+  <style>
+     /* Container styling */
+
+.success-alert {
     background-color: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
@@ -36,7 +39,7 @@
   }
 </style>
 <body>
-  <nav id="sidebar">
+ <nav id="sidebar">
     <ul>
       <li>
         <span class="logo">Blog</span>
@@ -64,11 +67,10 @@
         </button>
         <ul class="sub-menu">
           <div>
-          
-            <li class="active"><a href="postblog">PostBlog</a></li>
-            <li><a href="drafts">Drafts <span></span></a></li>
+            <li><a href="postblog">PostBlog</a></li>
+            <li class="active"><a href="drafts">Drafts <span></span></a></li>
             <li><a href="#">Document</a></li>
-            <li><a href="blogs">Blogs</a></li>
+            <li><a  href="blogs">Blogs</a></li>
           </div>
         </ul>
       </li>
@@ -87,8 +89,8 @@
             <li><a href="#">School</a></li>
           </div>
         </ul>
-      </li> -->
-      <li>
+      </li>-->
+      <li> 
         <a href="messages">
           <i class="fas fa-envelope"></i>
           <span>Message Box</span>
@@ -108,7 +110,7 @@
       </li>
       
     </ul>
-  </nav>
+</nav>
   <main>
     <% if(message.length > 0) { %>
       <div class="success-alert">
@@ -116,152 +118,52 @@
         <p><%= message %></p>
       </div>
        <% } %>
-       <div class="form">
-        <div class="form-container">
-            <form class="blog-form" action="createPost" method="POST" enctype="multipart/form-data">
-                <h2>Create a New Blog Post</h2>
-    
-                <label for="title">Title</label>
-                <input type="text" id="title" name="title" value="title"  class="clear-on-focus">
-    
-                <label for="author">Author</label>
-                <input type="text" id="author" name="author" value="admin" class="clear-on-focus">  
-    
-                <div class="category-selector">
-                    <label for="categories">Select a Category:</label>
-                    <select id="categories" name="categories" class="clear-on-focus"  >
-                        <option value="">--Select a Category--</option>
-                        <option value="nutrition" selected >Nutrition</option>
-                        <option value="fitness">Fitness</option>
-                        <option value="mental-health">Mental Health</option>
-                        <option value="wellness">Wellness</option>
-                        <option value="chronic-conditions">Chronic Conditions</option>
-                        <option value="lifestyle">Lifestyle</option>
-                        <option value="health-news">Health News</option>
-                        <option value="personal-stories">Personal Stories</option>
-                        <option value="expert-advice">Expert Advice</option>
-                        <option value="product-reviews">Product Reviews</option>
-                    </select>
-                </div>
-    
-                <label for="image-upload" class="image-upload-container">
-                    <span class="upload-icon">+</span>
-                    <input type="file" id="image-upload" name="image" accept="image/*" >
-                </label>
-    
-                <label for="description">Description</label>
-                <textarea id="description" name="description" class="clear-on-focus" rows="3">Here is some description</textarea>
-                
-                <label for="content">Content</label>
-                <textarea id="content" name="content" rows="5" ></textarea>
-    
-                <label for="tags">Tags</label>
-                <input type="text" id="tags" name="tags"  class="clear-on-focus"placeholder="Enter tags separated by commas">
-    
-                <div class="category-selector">
-                    <label for="postType">Select a post type:</label>
-                    <select id="postType" name="postType" class="clear-on-focus" >
-                        <option value="">--Select a type--</option>
-                        <option value="main">Main</option>
-                        <option value="feature">Feature</option>
-                        <option value="normal" selected>Normal</option>
-                    </select>
-                </div>
-    
-                <div class="post-button">
-                  <button class="submit-button" type="submit" name="action" value="publish" onclick="setPublishing(true)">Publish</button>
-                  <button type="submit" class="submit-button" name="action" value="draft" onclick="setPublishing(false)">Save as Draft</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <script>
-    let isPublishing = false;
-
-// Set the isPublishing flag based on the button clicked
-function setPublishing(publishing) {
-  isPublishing = publishing;
-}
-
-// Event listener to handle user leaving the page
-window.addEventListener('beforeunload', function (event) {
-  if (!isPublishing && isDataChanged()) {
-    saveDraftData();
-    const confirmationMessage = "Your changes are not saved. Do you really want to leave?";
-    event.returnValue = confirmationMessage;
-    return confirmationMessage; // Required for some browsers
-  }
-});
-
-// Check if any form data has been modified
-function isDataChanged() {
-  const { title, content, description } = collectFormData();
-  return title.trim() !== '' || content.trim() !== '' || description.trim() !== '';
-}
-
-// Collect form data from input fields
-function collectFormData() {
-  const title = document.getElementById('title')?.value || '';
-  const author = document.getElementById('author')?.value || '';
-  const category = document.getElementById('categories')?.value || '';
-  const image = document.getElementById('image-upload')?.files[0] || null;
-  const description = document.getElementById('description')?.value || '';
-  const content = document.getElementById('content')?.value || '';
-  const tags = document.getElementById('tags')?.value || '';
-  const postType = document.getElementById('postType')?.value || '';
-
-  return {
-    title,
-    author,
-    category,
-    image,
-    description,
-    content,
-    tags,
-    postType
-  };
-}
-
-// Save draft data to the server
-async function saveDraftData() {
-  const data = collectFormData();
-  const formData = new FormData();
-
-  // Append all fields to FormData
-  Object.keys(data).forEach((key) => {
-    if (data[key]) {
-      formData.append(key, data[key]);
+    <div class="post">
+      <% if (drafts.length > 0) { %>
+          <% drafts.forEach(draft => { %>
+              <div class="card">
+                  <% if (draft.image) { %>
+                      <img src="/<%= draft.image %>" alt="Image for <%= draft.title %>" width="200">
+                  <% } %>
+                  <div class="card-content">
+                      <h3><%= draft.title %></h3>
+                      <p><%= draft.description || 'No description available.' %></p>
+                      <p><strong>Author:</strong> <%= draft.author || 'Unknown' %></p>
+                      <p>
+                          <strong>Status:</strong>
+                          <span class="<%= draft.status === 'draft' ? 'status-draft' : 'status-published' %>">
+                              <%= draft.status.charAt(0).toUpperCase() + draft.status.slice(1) %>
+                          </span>
+                      </p>
+                      <p><strong>Tags:</strong> <%= draft.tags && draft.tags.length > 0 ? draft.tags.join(', ') : 'No tags' %></p>
+                      <!-- <a href="/blog/<%= draft._id %>" class="read-more">Read More</a> -->
+                      <a href="/blog/<%= draft._id %>" class="read-more">Read More</a>
+                      <a href="updatePage/<%= draft._id %>" class="edit-button">
+                        <span><i class="fa-solid fa-pen-to-square"></i></span> Edit
+                      </a>
+                      <form action="/admin/deleteBlog/<%= draft._id %>?_method=DELETE" method="POST" class="delete-form" onsubmit="return confirmDelete(event)">
+                        <button type="submit" class="delete-button">
+                          <i class="fa-solid fa-trash"></i> Delete
+                        </button>
+                      </form>
+                  </div>
+              </div>
+          <% }) %>
+      <% } else { %>
+          <p>No drafts found.</p>
+      <% } %>
+  </div>
+  
+  
+  </style>
+  
+  </main>
+  <script>
+    function confirmDelete(event) {
+        if (!confirm('Are you sure to delete this List?')) {
+            event.preventDefault();
+        }
     }
-  });
-
-  try {
-    const response = await fetch('http://localhost:5000/admin/saveDraft', {
-      method: 'POST',
-      body: formData
-    });
-
-    if (!response.ok) {
-      throw new Error("Server error while saving draft");
-    }
-
-    const responseData = await response.json();
-    console.log('Draft saved successfully:', responseData);
-  } catch (error) {
-    console.error('Error saving draft:', error);
-  }
-}
-
-// Clear input values on focus
-document.addEventListener("DOMContentLoaded", function () {
-  const fieldsToClear = document.querySelectorAll(".clear-on-focus");
-  fieldsToClear.forEach((field) => {
-    field.addEventListener("focus", function () {
-      this.value = ""; // Clear value on focus
-    });
-  });
-});
-
-    </script>
-    </body>
-    </html>
-    
+</script>
+</body>
+</html>

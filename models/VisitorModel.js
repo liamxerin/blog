@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
 
-// Define the Visit schema
 const visitSchema = new mongoose.Schema({
-  ipAddress: String,
-  userAgent: String,
-  timestamp: { type: Date, default: Date.now },
+    ipAddress: String,
+    userAgent: String,
+    postId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'BlogPost'
+    },
+    timestamp: { type: Date, default: Date.now }
 });
 
-// Create the Visit model
+// Create a unique index to prevent duplicate visits for the same IP and post
+visitSchema.index({ ipAddress: 1, postId: 1 }, { unique: true });
+
 const Visit = mongoose.model('Visit', visitSchema);
 
 module.exports = Visit;

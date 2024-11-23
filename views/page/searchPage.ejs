@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="../search1.css">
+   
+</head>
+<body>
+    <%- include('./components/navbar') %>
+
+
+  
+<div class="search-bar">
+    <form action="searchPage" method="GET">
+        <input 
+            type="text" 
+            placeholder="Search page results..." 
+            name="search" 
+            value="<%= query %>" 
+            aria-label="Search page results">
+        <button type="submit" aria-label="Search">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                <circle cx="10" cy="10" r="7" stroke="black" stroke-width="2" fill="none" />
+                <line x1="14" y1="14" x2="20" y2="20" stroke="black" stroke-width="2" />
+            </svg>
+        </button>
+    </form>
+</div>
+
+<!-- Search Results -->
+<div class="search-results">
+    <% if (results.length > 0) { %>
+        <% results.forEach(function(blog) { %>
+            <div class="search-card">
+                <% if (blog.image) { %>
+                    <img 
+                        src="/<%= blog.image %>" 
+                        alt="Image for <%= blog.title %>" 
+                        loading="lazy">
+                <% } %>
+                <div class="search-card-content">
+                    <h3><%= blog.title %></h3>
+                    <p><%= blog.description || 'No description available.' %></p>
+                    <p><strong>Author:</strong> <%= blog.author || 'Unknown' %></p>
+                    <p>
+                        <strong>Status:</strong>
+                        <span class="<%= blog.status === 'draft' ? 'status-draft' : 'status-published' %>">
+                            <%= blog.status.charAt(0).toUpperCase() + blog.status.slice(1) %>
+                        </span>
+                    </p>
+                    <p><strong>Tags:</strong> <%= blog.tags && blog.tags.length > 0 ? blog.tags.join(', ') : 'No tags' %></p>
+                    <a href="/blog/<%= blog._id %>" class="read-more">Read More</a>
+                </div>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>No results found for "<%= query %>".</p>
+    <% } %>
+</div>
+
+
+</body>
+<script>
+
+</script>
+</html>

@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const blogPostSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
+    default: "draft",
     trim: true,
   },
   author: {
     type: String,
-    required: true,
+    default: "draft",
     trim: true,
   },
   categories: {
@@ -17,40 +17,38 @@ const blogPostSchema = new mongoose.Schema({
       'nutrition', 'fitness', 'mental-health', 'wellness', 'chronic-conditions',
       'lifestyle', 'health-news', 'personal-stories', 'expert-advice', 'product-reviews',
     ],
-    required: true,
+    default: "nutrition", // Change to a valid category
   },
   image: {
-    type: String, // Assuming you'll store the image as a URL or file path
-    required: true,
+    type: String,
+    default: "draft",
   },
   description: {
     type: String,
     required: true,
+    default: "", // 
   },
   content: {
     type: String,
-    required: true,
+    default: "draft",
   },
-
   tags: {
-    type: [String], // Array of strings, each tag separated by commas
+    type: [String],
     default: [],
   },
- 
- viewCount:{
-  type: Number,
-  default :0
- },
-
- comments: [{ 
-  text: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now }
-}],
-  postType:{
-    type: String,
-    required: true,
+  viewCount: {
+    type: Number,
+    default: 0,
   },
-
+  comments: [{ 
+    text: { type: String },
+    createdAt: { type: Date, default: Date.now },
+  }],
+  postType: {
+    type: String,
+    default: "draft",
+  },
+  status: { type: String, default: "draft" },
   createdAt: {
     type: Date,
     default: Date.now,

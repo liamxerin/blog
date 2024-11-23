@@ -8,6 +8,7 @@ const session = require('express-session')
 const flash = require('connect-flash')
 const cors = require("cors")
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 require('dotenv').config();
 
 app.set('view engine', 'ejs');
@@ -17,6 +18,9 @@ app.set('views', './views');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+// Use method-override to handle PUT and PATCH in forms
+app.use(methodOverride('_method'));
 const cookieParser = require('cookie-parser');
 
 //Middleware
@@ -46,12 +50,15 @@ app.use('/uploads', express.static('uploads'));
 
 
 // Connect to DB and start server
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log("Database-connected at , Listening port = ",process.env.PORT);
-    });
-  })
-  .catch((error) => {
-    console.log("Database connection error:", error);
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => {
+  app.listen(PORT, () => {
+    console.log("Database connected. Listening on port:", PORT);
   });
+})
+.catch((error) => {
+  console.log("Database connection error:", error);
+});

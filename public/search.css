@@ -1,0 +1,86 @@
+/* styles.css */
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 80%;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+} */
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 5px 15px;
+    background-color: #fff;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 1rem;
+    padding: 5px;
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.result {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.result .title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.result .tags {
+    display: flex;
+    gap: 10px;
+}
+
+.tag {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.blue {
+    color: #0073e6;
+    background-color: #e0f4ff;
+    border: 1px solid #0073e6;
+}
+
+.green {
+    color: #009688;
+    background-color: #e0f7f4;
+    border: 1px solid #009688;
+}

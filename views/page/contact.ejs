@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us</title>
+<link rel="stylesheet" href="contact.css">
+<style>
+    /* General Reset */
+ 
+</style>
+</head>
+<style>
+    .success-alert {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.5s ease-in;
+    }
+  
+    .success-alert p {
+      margin: 0;
+      padding-left: 10px;
+    }
+  
+    .success-icon {
+      font-size: 1.5rem;
+      color: #28a745;
+    }
+    </style>
+<body>
+    <% if(message.length > 0) { %>
+        <div class="success-alert">
+          <span class="success-icon">✔️</span>
+          <p><%= message %></p>
+        </div>
+         <% } %>
+    <%- include('./components/navbar') %>
+   
+<div class="contact-body">
+    <div class="contact-container">
+        <!-- Contact Info Boxes -->
+        <div class="info-boxes">
+            <!-- <div class="info-box">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>OUR MAIN OFFICE</h3>
+                <p>SoHo 94 Broadway St<br>New York, NY 1001</p>
+            </div> -->
+            <div class="info-box">
+                <i class="fas fa-phone"></i>
+                <h3>PHONE NUMBER</h3>
+                <p>+639458829861</p>
+            </div>
+            <!-- <div class="info-box">
+                <i class="fas fa-fax"></i>
+                <h3>FAX</h3>
+                <p>1-234-567-8900</p>
+            </div> -->
+            <div class="info-box">
+                <i class="fas fa-envelope"></i>
+                <h3>EMAIL</h3>
+                <p><a href="mailto:vicentroyceampong@yahoo.com">vicentroyceampong@yahoo.com</a></p>
+            </div>
+            
+    
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <form action="sendMessage" method="post">
+                <input type="text" name="name" placeholder="Enter your Name" required>
+                <input type="email" name="email" placeholder="Enter a valid email address" required>
+                <textarea placeholder="Enter your message here" name="message" required></textarea>
+                <button type="submit">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

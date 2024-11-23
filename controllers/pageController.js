@@ -1,5 +1,6 @@
 const BlogPost = require('../models/BlogModel')
 const Visit = require('../models/VisitorModel')
+const Message = require('../models/MessageModel')
 const home = async (req, res) => {
     try {
       const ipAddress = req.ip; // Capturing visitor's IP address
@@ -34,6 +35,40 @@ const home = async (req, res) => {
       res.status(500).send("An error occurred while loading the home page.");
     }
   };
+
+  const contactPage = async ( req,res) =>{
+    try{
+
+        res.render('page/contact', { message: req.flash('message')})
+
+    }catch(error){
+        console.error("Error rendering contactPage:", error);
+        res.status(500).send("An error occurred while loading the contact page.");
+    }
+  }
+  const sendMessage = async(req,res)=>{
+    const { name, email, message } = req.body;
+
+    try {
+        // Create a new message document
+        const newMessage = new Message({ name, email, message });
+
+        // Save the message to the database
+        await newMessage.save();
+        if(newMessage) {
+            req.flash('message', 'Message Sent!')
+            return res.redirect('contact');
+         }
+        // Send a success response
+        res.status(201).json({ message: 'Message sent and saved successfully!' });
+    } catch (error) {
+        console.error('Error saving message:', error);
+        res.status(500).json({ error: 'Failed to save message. Please try again later.' });
+    }
+}
+
+
+
 const showByCategory = async (req, res) => {
     try {
         const category = req.params.category;
@@ -68,17 +103,39 @@ const getSingleBlog = async (req, res) => {
         if (!post) {
             return res.status(404).render('page/blog', { post: null, message: "Blog post not found" });
         }
-        post.viewCount +=1
-        await post.save(); 
+
+        // Capture IP address and user-agent from the request
+        const ipAddress = req.ip;
+        const userAgent = req.headers['user-agent'];
+
+        // Check if the IP address has visited this post before
+        const existingVisit = await Visit.findOne({ ipAddress, postId });
+
+        // If the IP address hasn't been recorded for this post, increment view count and save the visit
+        if (!existingVisit) {
+            const visit = new Visit({
+                ipAddress,
+                userAgent,
+                postId  // Save the post ID to track visits per post
+            });
+
+            await visit.save(); // Save the visit to the database
+            post.viewCount += 1; // Increment the view count on the post
+            await post.save();    // Save the updated post
+        }
+
         const totalComments = post.comments.length;
         const commentLabel = totalComments === 1 ? "comment" : "comments";
-        // Render the view with the found post
+
+        // Render the view with the found post and additional data
         res.render('page/blog', { post, message: null, totalComments, commentLabel });
     } catch (error) {
         console.error("Error fetching single blog post:", error);
         res.status(500).send("An error occurred while fetching the blog post.");
     }
-}
+};
+
+
    
 const postComment = async (req, res) => {
     try {
@@ -105,9 +162,22 @@ const postComment = async (req, res) => {
         res.status(500).send("An error occurred while commenting.");
     }
 };
+const searchPage = async ( req, res) =>{
+    const query = req.query.search || ''
+    let results = [];
+    if (query) {
+       // Perform a search on the 'name' or 'description' fields
+       results = await BlogPost.find({
+           $or: [
+               { title: { $regex: query, $options: 'i' } },
+               { description: { $regex: query, $options: 'i' } }
+           ]
+       });
+   }
 
-
-
+   // Render the page with results
+   res.render('page/searchPage', { query, results });
+}
 
 
 
@@ -118,6 +188,10 @@ const postComment = async (req, res) => {
 module.exports ={
     home,
     showByCategory,
+    sendMessage,
     getSingleBlog,
     postComment,
+    contactPage,
+    searchPage,
+
 }

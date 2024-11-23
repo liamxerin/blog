@@ -297,10 +297,14 @@ main p{
   textarea {
     resize: vertical;
   }
-  
+  .post-button{
+    display: flex;
+    
+  }
   .submit-button {
     width: 100%;
     padding: 10px;
+    margin: 10px;
     background-color: var(--accent-clr);
     color: #ffffff;
     border: none;
@@ -314,43 +318,7 @@ main p{
   .submit-button:hover {
     background-color: #357abd;
   }
-  .image-upload-container {
-    position: relative;
-    width: 50px;
-    height: 50px;
-  }
-  
-  input[type="file"] {
-    opacity: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-  
-  .upload-icon {
-    width: 50px;
-    height: 50px;
-    background-color: #4a90e2;
-    color: #ffffff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem; /* Smaller icon size */
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .upload-icon:hover {
-    background-color: #357abd;
-  }
 
-  .button-container {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-  }
   
   .logout-button {
     background-color: var(--accent-clr);

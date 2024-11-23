@@ -43,7 +43,7 @@
                                 <p><%= post.description || 'No description available' %></p>
                                 
                                 <a href="/blog/<%= post._id %>" class="read-more">Read More</a>
-                                <p class="blog-views"><i class="fa-solid fa-eye"></i> <%= post.views || 0 %></p>
+                                <p class="blog-views"><i class="fa-solid fa-eye"></i> <%= post.viewCount || 0 %></p>
                                 <p><%= post.totalComments %> <%= post.totalComments === 1 ? 'comment' : 'comments' %></p>
                             </div>
                         </div>

@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="../style.css">
-  <script type="text/javascript" src="../app.js" defer></script>
- 
+  <title>Update</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <style>
-  .success-alert {
+.success-alert {
     background-color: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
@@ -36,7 +36,7 @@
   }
 </style>
 <body>
-  <nav id="sidebar">
+ <nav id="sidebar">
     <ul>
       <li>
         <span class="logo">Blog</span>
@@ -45,13 +45,13 @@
         </button>
       </li>
       <li>
-        <a href="home">
+        <a href="/admin/home">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-200h120v-200q0-17 11.5-28.5T400-440h160q17 0 28.5 11.5T600-400v200h120v-360L480-740 240-560v360Zm-80 0v-360q0-19 8.5-36t23.5-28l240-180q21-16 48-16t48 16l240 180q15 11 23.5 28t8.5 36v360q0 33-23.5 56.5T720-120H560q-17 0-28.5-11.5T520-160v-200h-80v200q0 17-11.5 28.5T400-120H240q-33 0-56.5-23.5T160-200Zm320-270Z"/></svg>
           <span>Home</span>
         </a>
       </li>
-      <li >
-        <a href="dashboard">
+      <li class="/active">
+        <a href="/admin/dashboard">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M520-640v-160q0-17 11.5-28.5T560-840h240q17 0 28.5 11.5T840-800v160q0 17-11.5 28.5T800-600H560q-17 0-28.5-11.5T520-640ZM120-480v-320q0-17 11.5-28.5T160-840h240q17 0 28.5 11.5T440-800v320q0 17-11.5 28.5T400-440H160q-17 0-28.5-11.5T120-480Zm400 320v-320q0-17 11.5-28.5T560-520h240q17 0 28.5 11.5T840-480v320q0 17-11.5 28.5T800-120H560q-17 0-28.5-11.5T520-160Zm-400 0v-160q0-17 11.5-28.5T160-360h240q17 0 28.5 11.5T440-320v160q0 17-11.5 28.5T400-120H160q-17 0-28.5-11.5T120-160Zm80-360h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></svg>
           <span>Dashboard</span>
         </a>
@@ -64,11 +64,10 @@
         </button>
         <ul class="sub-menu">
           <div>
-          
-            <li class="active"><a href="postblog">PostBlog</a></li>
-            <li><a href="drafts">Drafts <span></span></a></li>
+            <li><a href="/admin/postblog">PostBlog</a></li>
+            <li><a href="/admin/drafts">Drafts <span></span></a></li>
             <li><a href="#">Document</a></li>
-            <li><a href="blogs">Blogs</a></li>
+            <li><a href="/admin/blogs">Blogs</a></li>
           </div>
         </ul>
       </li>
@@ -89,179 +88,122 @@
         </ul>
       </li> -->
       <li>
-        <a href="messages">
+        <a href="/admin/messages">
           <i class="fas fa-envelope"></i>
           <span>Message Box</span>
         </a>
       </li>
       <li>
-        <a href="profilePage">
+        <a href="/admin/profilePage">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-240v-32q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v32q0 33-23.5 56.5T720-160H240q-33 0-56.5-23.5T160-240Zm80 0h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></svg>
           <span>Profile</span>
         </a>
       </li>
       <li>
-        <a href="SearchPage">
+        <a href="/admin/profilePage">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-240v-32q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v32q0 33-23.5 56.5T720-160H240q-33 0-56.5-23.5T160-240Zm80 0h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></svg>
+          <span>Profile</span>
+        </a>
+      </li>
+      <li>
+        <a href="/admin/SearchPage">
             <i class="fa-solid fa-magnifying-glass"></i>
           <span>Search</span>
         </a>
       </li>
       
     </ul>
-  </nav>
+</nav>
   <main>
     <% if(message.length > 0) { %>
-      <div class="success-alert">
-        <span class="success-icon">✔️</span>
-        <p><%= message %></p>
-      </div>
-       <% } %>
-       <div class="form">
+        <div class="success-alert">
+          <span class="success-icon">✔️</span>
+          <p><%= message %></p>
+        </div>
+         <% } %>
+    <div class="form">
         <div class="form-container">
-            <form class="blog-form" action="createPost" method="POST" enctype="multipart/form-data">
-                <h2>Create a New Blog Post</h2>
+            <form class="blog-form" action="/admin/updateBlog/<%= blog._id %>?_method=PATCH" method="POST" enctype="multipart/form-data">
+                <h2>Update Blog Post</h2>
+                
+                <!-- Hidden Method Override -->
+                <input type="hidden" name="id" value="<%= blog.id %>">
+                <input type="hidden" name="_method" value="PATCH">
     
+                <!-- Blog Title -->
                 <label for="title">Title</label>
-                <input type="text" id="title" name="title" value="title"  class="clear-on-focus">
+                <input type="text" id="title" name="title" placeholder="Enter blog title" value="<%=blog.title %>" required>
     
+                <!-- Author -->
                 <label for="author">Author</label>
-                <input type="text" id="author" name="author" value="admin" class="clear-on-focus">  
+                <input type="text" id="author" name="author" placeholder="Enter author name" value="<%= blog.author %>" required>
     
+                <!-- Categories -->
                 <div class="category-selector">
-                    <label for="categories">Select a Category:</label>
-                    <select id="categories" name="categories" class="clear-on-focus"  >
+                    <label for="categories">Category</label>
+                    <select id="categories" name="categories" required>
                         <option value="">--Select a Category--</option>
-                        <option value="nutrition" selected >Nutrition</option>
-                        <option value="fitness">Fitness</option>
-                        <option value="mental-health">Mental Health</option>
-                        <option value="wellness">Wellness</option>
-                        <option value="chronic-conditions">Chronic Conditions</option>
-                        <option value="lifestyle">Lifestyle</option>
-                        <option value="health-news">Health News</option>
-                        <option value="personal-stories">Personal Stories</option>
-                        <option value="expert-advice">Expert Advice</option>
-                        <option value="product-reviews">Product Reviews</option>
+<option value="nutrition" <%= blog.categories == 'nutrition' ? 'selected' : '' %> >Nutrition</option>
+<option value="fitness" <%= blog.categories == 'fitness' ? 'selected' : '' %> >Fitness</option>
+<option value="mental-health" <%= blog.categories == 'mental-health' ? 'selected' : '' %> >Mental Health</option>
+<option value="wellness" <%= blog.categories == 'wellness' ? 'selected' : '' %> >Wellness</option>
+<option value="chronic-conditions" <%= blog.categories == 'chronic-conditions' ? 'selected' : '' %> >Chronic Conditions</option>
+<option value="lifestyle" <%= blog.categories == 'lifestyle' ? 'selected' : '' %> >Lifestyle</option>
+<option value="health-news" <%= blog.categories == 'health-news' ? 'selected' : '' %> >Health News</option>
+<option value="personal-stories" <%= blog.categories == 'personal-stories' ? 'selected' : '' %> >Personal Stories</option>
+<option value="expert-advice" <%= blog.categories == 'expert-advice' ? 'selected' : '' %> >Expert Advice</option>
+<option value="product-reviews" <%= blog.categories == 'product-reviews' ? 'selected' : '' %> >Product Reviews</option>
+
                     </select>
                 </div>
     
+                <!-- Image Upload -->
                 <label for="image-upload" class="image-upload-container">
                     <span class="upload-icon">+</span>
-                    <input type="file" id="image-upload" name="image" accept="image/*" >
+                    <input type="file"  id="image-upload" name="image" accept="image/*">
+                    <small>Current Image: <%= blog.image %></small>
                 </label>
     
+                <!-- Description -->
                 <label for="description">Description</label>
-                <textarea id="description" name="description" class="clear-on-focus" rows="3">Here is some description</textarea>
-                
+                <textarea id="description" name="description" rows="3" placeholder="Enter a brief description"><%= blog.description %></textarea>
+    
+                <!-- Content -->
                 <label for="content">Content</label>
-                <textarea id="content" name="content" rows="5" ></textarea>
+                <textarea id="content" name="content" rows="5" placeholder="Enter the main content"><%= blog.content %></textarea>
     
+                <!-- Tags -->
                 <label for="tags">Tags</label>
-                <input type="text" id="tags" name="tags"  class="clear-on-focus"placeholder="Enter tags separated by commas">
-    
+                <input type="text" id="tags" name="tags" placeholder="Enter tags separated by commas" value="<%= blog.tags %>">
+                <!--Status-->
+                <div class="status-selector">
+                    <label for="status">Status</label>
+                    <select name="status" id="status">
+                        <option value="">--Select status</option>
+                        <option value="published" <%= blog.status == 'published' ? 'selected' : '' %>>Published</option>
+                        <option value="draft"<%= blog.status == 'draft' ? 'selected' : '' %>>Draft</option>
+                    </select>
+                </div>
+                <!-- Post Type -->
                 <div class="category-selector">
-                    <label for="postType">Select a post type:</label>
-                    <select id="postType" name="postType" class="clear-on-focus" >
-                        <option value="">--Select a type--</option>
-                        <option value="main">Main</option>
-                        <option value="feature">Feature</option>
-                        <option value="normal" selected>Normal</option>
+                    <label for="postType">Post Type</label>
+                    <select id="postType" name="postType" required>
+                        <option value="">--Select a Post Type--</option>
+                        <option value="main" <%= blog.postType == 'main' ? 'selected' : '' %>>Main</option>
+                        <option value="feature" <%= blog.postType == 'feature' ? 'selected' : ''%>>Feature</option>
+                        <option value="normal" <%=blog.postType == 'normal' ? 'selected' : ''%>>Normal</option>
                     </select>
                 </div>
     
+                <!-- Submit Buttons -->
                 <div class="post-button">
-                  <button class="submit-button" type="submit" name="action" value="publish" onclick="setPublishing(true)">Publish</button>
-                  <button type="submit" class="submit-button" name="action" value="draft" onclick="setPublishing(false)">Save as Draft</button>
+                   
+                    <button class="submit-button" type="submit" >Update</button>
                 </div>
             </form>
         </div>
     </div>
-    <script>
-    let isPublishing = false;
-
-// Set the isPublishing flag based on the button clicked
-function setPublishing(publishing) {
-  isPublishing = publishing;
-}
-
-// Event listener to handle user leaving the page
-window.addEventListener('beforeunload', function (event) {
-  if (!isPublishing && isDataChanged()) {
-    saveDraftData();
-    const confirmationMessage = "Your changes are not saved. Do you really want to leave?";
-    event.returnValue = confirmationMessage;
-    return confirmationMessage; // Required for some browsers
-  }
-});
-
-// Check if any form data has been modified
-function isDataChanged() {
-  const { title, content, description } = collectFormData();
-  return title.trim() !== '' || content.trim() !== '' || description.trim() !== '';
-}
-
-// Collect form data from input fields
-function collectFormData() {
-  const title = document.getElementById('title')?.value || '';
-  const author = document.getElementById('author')?.value || '';
-  const category = document.getElementById('categories')?.value || '';
-  const image = document.getElementById('image-upload')?.files[0] || null;
-  const description = document.getElementById('description')?.value || '';
-  const content = document.getElementById('content')?.value || '';
-  const tags = document.getElementById('tags')?.value || '';
-  const postType = document.getElementById('postType')?.value || '';
-
-  return {
-    title,
-    author,
-    category,
-    image,
-    description,
-    content,
-    tags,
-    postType
-  };
-}
-
-// Save draft data to the server
-async function saveDraftData() {
-  const data = collectFormData();
-  const formData = new FormData();
-
-  // Append all fields to FormData
-  Object.keys(data).forEach((key) => {
-    if (data[key]) {
-      formData.append(key, data[key]);
-    }
-  });
-
-  try {
-    const response = await fetch('http://localhost:5000/admin/saveDraft', {
-      method: 'POST',
-      body: formData
-    });
-
-    if (!response.ok) {
-      throw new Error("Server error while saving draft");
-    }
-
-    const responseData = await response.json();
-    console.log('Draft saved successfully:', responseData);
-  } catch (error) {
-    console.error('Error saving draft:', error);
-  }
-}
-
-// Clear input values on focus
-document.addEventListener("DOMContentLoaded", function () {
-  const fieldsToClear = document.querySelectorAll(".clear-on-focus");
-  fieldsToClear.forEach((field) => {
-    field.addEventListener("focus", function () {
-      this.value = ""; // Clear value on focus
-    });
-  });
-});
-
-    </script>
-    </body>
-    </html>
     
+  </main>
+</body>
+</html>
