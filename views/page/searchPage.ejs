@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search</title>
+    <link rel="icon" type="image/png" href="/logo.png">
     <link rel="stylesheet" href="../search1.css">
    
 </head>
@@ -43,12 +44,10 @@
                 <div class="search-card-content">
                     <h3><%= blog.title %></h3>
                     <p><%= blog.description || 'No description available.' %></p>
-                    <p><strong>Author:</strong> <%= blog.author || 'Unknown' %></p>
+                    <!-- <p><strong>Author:</strong> <%= blog.author || 'Unknown' %></p> -->
                     <p>
-                        <strong>Status:</strong>
-                        <span class="<%= blog.status === 'draft' ? 'status-draft' : 'status-published' %>">
-                            <%= blog.status.charAt(0).toUpperCase() + blog.status.slice(1) %>
-                        </span>
+                    
+                       
                     </p>
                     <p><strong>Tags:</strong> <%= blog.tags && blog.tags.length > 0 ? blog.tags.join(', ') : 'No tags' %></p>
                     <a href="/blog/<%= blog._id %>" class="read-more">Read More</a>
@@ -63,6 +62,5 @@
 
 </body>
 <script>
-
 </script>
 </html>

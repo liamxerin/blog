@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="icon" type="image/png" href="/logo.png">
     <link rel="stylesheet" href="home.css">
 </head>
 <body>
@@ -19,9 +20,23 @@
                         <h3><%= mainPost.title %></h3>
                         <p><%= mainPost.description || 'No description available.' %></p>
                         <a href="/blog/<%= mainPost._id %>" class="read-more">Read More</a>
+                        <div class="likes-dislikes">
+                            <p class="blog-views"><i class="fa-solid fa-eye"></i> <%=mainPost.viewCount || 0 %></p>
+                            <p>
+                                <i class="fa-solid fa-thumbs-up"></i> <%= mainPost.likes || 0 %>
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-thumbs-down"></i> <%= mainPost.dislikes || 0 %> 
+                            </p>
+                            <p><i class="fa-regular fa-comment"></i>
+                                <%= mainPost.totalComments || 0 %> </p>
+                        </div>
                     </div>
+                    
                 </div>
+              
             </div>
+            
         <% } else { %>
             <p>No main post found.</p>
         <% } %>
@@ -57,6 +72,17 @@
                         <p><%= featurePost.description || 'No description available.' %></p>
                         <p><strong>Tags:</strong> <%= featurePost.tags.join(', ') %></p>
                         <a href="/blog/<%= featurePost._id %>" class="read-more">Read More</a>
+                    </div>
+                    <div class="likes-dislikes">
+                        <p class="blog-views"><i class="fa-solid fa-eye"></i> <%=featurePost.viewCount || 0 %></p>
+                        <p>
+                            <i class="fa-solid fa-thumbs-up"></i> <%= featurePost.likes || 0 %>
+                        </p>
+                        <p>
+                            <i class="fa-solid fa-thumbs-down"></i> <%= featurePost.dislikes || 0 %> 
+                        </p>
+                        <p><i class="fa-regular fa-comment"></i>
+                            <%= featurePost.totalComments || 0 %> </p>
                     </div>
                 </div>
             <% }) %>

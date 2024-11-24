@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+  }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.about-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+h1 {
+  padding-top: 100px;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.about-section {
+  margin-bottom: 20px;
+}
+
+.about-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #34495e;
+}
+
+.about-section p {
+  line-height: 1.6;
+  font-size: 1rem;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .about-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-section p {
+    font-size: 0.9rem;
+  }
+}
+
+</style>
+<body>
+  <%- include('./components/navbar') %>
+  <div class="about-container">
+    <h1>About Us</h1>
+    <div class="about-section">
+      <h2>Empowering Health Through Clear Planning</h2>
+      <p>
+        Our mission is to simplify medical planning for everyone. Whether you’re navigating your own health journey or managing care for loved ones, we understand the importance of having a reliable resource to organize and communicate medical plans. With thoughtful articles, detailed templates, and practical advice, our blog is dedicated to empowering individuals to take control of their health with clarity and confidence.
+      </p>
+    </div>
+    <div class="about-section">
+      <h2>Trusted Information, Tailored to You</h2>
+      <p>
+        We believe that effective medical planning starts with accurate and personalized information. Each post on this blog is carefully curated to address a wide range of health needs, from preventive care to chronic illness management. By presenting actionable steps and breaking down complex medical processes into simple terms, we aim to make healthcare more approachable and stress-free for everyone.
+      </p>
+    </div>
+    <div class="about-section">
+      <h2>Join Us on the Path to Better Health</h2>
+      <p>
+        This blog is more than just a collection of plans—it’s a community. We invite you to explore, share, and engage with the content, helping us create a supportive space for everyone seeking to improve their health outcomes. Whether you're here to learn, stay informed, or contribute your own experiences, you’re a vital part of our mission to promote better health through thoughtful and accessible medical planning.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

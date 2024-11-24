@@ -23,13 +23,17 @@ const home = async (req, res) => {
       const posts = await BlogPost.find({ postType: { $in: ['feature', 'main'] } })
         .sort({ createdAt: -1 })  // Sort by creation date
         .select('-content');       // Exclude 'content' field if not needed
+        const postsWithComments = posts.map(post => ({
+            ...post.toObject(),
+            totalComments: post.comments.length,
+        }));
   
       // Separate main and feature posts
       const mainPost = posts.find(post => post.postType === 'main');
       const featurePosts = posts.filter(post => post.postType === 'feature');
   
       // Render the view with separated main and feature posts
-      res.render('page/home', { mainPost, featurePosts });
+      res.render('page/home', { mainPost , featurePosts, featurePosts : postsWithComments,});
     } catch (error) {
       console.error("Error rendering home:", error);
       res.status(500).send("An error occurred while loading the home page.");
@@ -178,9 +182,90 @@ const searchPage = async ( req, res) =>{
    // Render the page with results
    res.render('page/searchPage', { query, results });
 }
+const likeBlog = async (req, res) => {
+    try {
+        const blogId = req.params.id;
+        const userIp = req.ip; // Get user IP address
+
+        console.log('Liking blog with ID:', blogId, 'from IP:', userIp);
+
+        const blog = await BlogPost.findById(blogId);
+        if (!blog) {
+            return res.status(404).send('Blog not found');
+        }
+
+        // Check if the user has already liked the blog
+        if (blog.likedBy.includes(userIp)) {
+            // User wants to remove their like
+            blog.likes = (blog.likes || 0) - 1;
+            blog.likedBy = blog.likedBy.filter(ip => ip !== userIp); // Remove IP from likedBy
+            console.log('Like removed for blog:', blogId);
+        } else {
+            // User is liking the blog
+            // Remove the IP from dislikedBy if they previously disliked it
+            blog.dislikedBy = blog.dislikedBy.filter(ip => ip !== userIp);
+            blog.dislikes = Math.max((blog.dislikes || 0) - 1, 0); // Ensure dislikes don't go negative
+
+            blog.likes = (blog.likes || 0) + 1;
+            blog.likedBy.push(userIp); // Add IP to likedBy
+            console.log('Blog liked successfully:', blogId);
+        }
+
+        await blog.save();
+        res.redirect(`/blog/${blogId}#like-dislike-container`);
+    } catch (error) {
+        console.error('Error liking the blog:', error.message);
+        res.status(500).send('Server error');
+    }
+};
+
+const dislikeBlog = async (req, res) => {
+    try {
+        const blogId = req.params.id;
+        const userIp = req.ip; // Get user IP address
+
+        console.log('Disliking blog with ID:', blogId, 'from IP:', userIp);
+
+        const blog = await BlogPost.findById(blogId);
+        if (!blog) {
+            return res.status(404).send('Blog not found');
+        }
+
+        // Check if the user has already disliked the blog
+        if (blog.dislikedBy.includes(userIp)) {
+            // User wants to remove their dislike
+            blog.dislikes = (blog.dislikes || 0) - 1;
+            blog.dislikedBy = blog.dislikedBy.filter(ip => ip !== userIp); // Remove IP from dislikedBy
+            console.log('Dislike removed for blog:', blogId);
+        } else {
+            // User is disliking the blog
+            // Remove the IP from likedBy if they previously liked it
+            blog.likedBy = blog.likedBy.filter(ip => ip !== userIp);
+            blog.likes = Math.max((blog.likes || 0) - 1, 0); // Ensure likes don't go negative
+
+            blog.dislikes = (blog.dislikes || 0) + 1;
+            blog.dislikedBy.push(userIp); // Add IP to dislikedBy
+            console.log('Blog disliked successfully:', blogId);
+        }
+
+        await blog.save();
+        res.redirect(`/blog/${blogId}#like-dislike-container`);
+    } catch (error) {
+        console.error('Error disliking the blog:', error.message);
+        res.status(500).send('Server error');
+    }
+};
 
 
 
+const aboutPage = async( req, res) =>{
+    try{
+        res.render('page/aboutPage');
+    }catch(error){
+        console.error("Error rendering blog page:", error);
+        res.status(500).send("An error occurred while loading the blog page.");
+    }
+ }
 
 
   
@@ -193,5 +278,8 @@ module.exports ={
     postComment,
     contactPage,
     searchPage,
+    likeBlog,
+    dislikeBlog,
+    aboutPage
 
 }

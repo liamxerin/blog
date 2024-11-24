@@ -146,6 +146,17 @@
     <i class="fa-solid fa-trash"></i> Delete
   </button>
 </form>
+<div class="likes-dislikes">
+  <p class="blog-views"><i class="fa-solid fa-eye"></i> <%= blog.viewCount || 0 %></p>
+  <p>
+      <i class="fa-solid fa-thumbs-up"></i> <%= blog.likes || 0 %>
+  </p>
+  <p>
+      <i class="fa-solid fa-thumbs-down"></i> <%= blog.dislikes || 0 %> 
+  </p>
+  <p><i class="fa-regular fa-comment"></i>
+      <%= blog.totalComments %> </p>
+</div>
                   </div>
               </div>
           <% }) %>

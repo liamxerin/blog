@@ -40,10 +40,14 @@ const blogPostSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  likes: { type: Number, default: 0 },
+  dislikes: { type: Number, default: 0 },
   comments: [{ 
     text: { type: String },
     createdAt: { type: Date, default: Date.now },
   }],
+  likedBy: { type: [String], default: [] }, // List of IPs that liked
+  dislikedBy: { type: [String], default: [] } ,// List of IPs that disliked
   postType: {
     type: String,
     default: "draft",

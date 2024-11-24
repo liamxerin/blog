@@ -240,6 +240,37 @@
     font-size: 0.8rem;
     color: #555;
   }
+  .like-dislike-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.like-button, .dislike-button {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.like-button:hover {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.dislike-button:hover {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.like-button i, .dislike-button i {
+    margin-right: 5px;
+}
+
   
   /* Media Query for smaller screens (max-width: 468px) */
   @media (max-width: 468px) {
@@ -254,7 +285,7 @@
     }
   
     .comments-list {
-      width: 100%;
+      width: 80%;
     }
   
     /* For the input container, make it full width */

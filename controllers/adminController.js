@@ -28,11 +28,15 @@ const getAllBlogs = async (req , res) =>{
 
         const draftCount = await BlogPost.countDocuments({ status: "draft" });
         const blogs = await BlogPost.find({ status: "published" });
+        const postsWithComments = blogs.map(blog => ({
+            ...blog.toObject(),
+            totalComments: blog.comments.length,
+        }));
 
         res.render( 'admin/blogs', {
             message : req.flash('message'),
-            blogs 
-            , draftCount
+            blogs : postsWithComments,
+             draftCount
         });
 
     }catch(error){
@@ -40,6 +44,8 @@ const getAllBlogs = async (req , res) =>{
         res.status(500).send("An error occurred while loading the blog page.");
     }
 }
+
+ 
  const getAllDraft = async (req, res)=>{
     try{
 
@@ -213,17 +219,22 @@ const dashboard = async (req, res) => {
         const postsWithViews = await Promise.all(posts.map(async (post) => {
             const viewCount = await Visit.countDocuments({ postId: post._id });
             const commentCount = post.comments ? post.comments.length : 0;
-            return { ...post.toObject(), viewCount, commentCount };
+            const likeCount = post.likes || 0;
+            const dislikeCount = post.dislikes || 0;
+            return { ...post.toObject(), viewCount, commentCount, likeCount, dislikeCount  };
         }));
 
         // Calculate total views across all posts
         const totalViews = postsWithViews.reduce((sum, post) => sum + post.viewCount, 0);
         //Get all comments with comment count
         const totalComments = postsWithViews.reduce((sum, post) => sum + post.commentCount, 0);
-     
+       //Get all comments with like count
+       const totalLikes = postsWithViews.reduce((sum, post )=> sum+post.likeCount, 0);
+        //Get all comments with like count
+       const totalDisLikes = postsWithViews.reduce((sum, post )=> sum+post.dislikeCount, 0);
 
         // Render the dashboard with data
-        res.render('admin/dashboard', { visitCount, postCount, publishedCount,  postsWithViews, recentVisits, totalViews, totalComments, draftCount });
+        res.render('admin/dashboard', { visitCount, postCount, publishedCount,  postsWithViews, recentVisits, totalViews, totalComments, draftCount,totalLikes,totalDisLikes  });
     } catch (error) {
         console.error("Error rendering dashboard:", error);
         res.status(500).send("An error occurred while loading the dashboard.");
@@ -466,6 +477,7 @@ const searchPage = async ( req, res) =>{
 }
 
 
+
     
 
 
@@ -491,6 +503,7 @@ module.exports = {
     deleteMessage,
     deleteMessageCollection,
     searchPage,
+    aboutPage,
 
 
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= category %> - Blog Posts</title>
+    <link rel="icon" type="image/png" href="/logo.png">
     <link rel="stylesheet" href="/category.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -43,8 +44,19 @@
                                 <p><%= post.description || 'No description available' %></p>
                                 
                                 <a href="/blog/<%= post._id %>" class="read-more">Read More</a>
-                                <p class="blog-views"><i class="fa-solid fa-eye"></i> <%= post.viewCount || 0 %></p>
-                                <p><%= post.totalComments %> <%= post.totalComments === 1 ? 'comment' : 'comments' %></p>
+                               
+                              
+                                <div class="likes-dislikes">
+                                    <p class="blog-views"><i class="fa-solid fa-eye"></i> <%= post.viewCount || 0 %></p>
+                                    <p>
+                                        <i class="fa-solid fa-thumbs-up"></i> <%= post.likes || 0 %>
+                                    </p>
+                                    <p>
+                                        <i class="fa-solid fa-thumbs-down"></i> <%= post.dislikes || 0 %> 
+                                    </p>
+                                    <p><i class="fa-regular fa-comment"></i>
+                                        <%= post.totalComments %> </p>
+                                </div>
                             </div>
                         </div>
                    
