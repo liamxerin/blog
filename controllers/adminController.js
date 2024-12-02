@@ -475,6 +475,14 @@ const searchPage = async ( req, res) =>{
     // Render the page with results
     res.render('admin/searchPage', { query, results });
 }
+const aboutPage = async (req, res) =>{
+    try {
+        res.render('admin/aboutPage' );
+    } catch (error) {
+        console.error("Error rendering aboutPage:", error);
+        res.status(500).send("An error occurred while loading the aboutPage.");
+    }
+}
 
 
 
