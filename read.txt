@@ -1,0 +1,7 @@
+Build your own mongodb server 
+Make env file to build enviroment
+example 
+>>PORT = 5000
+>>MONGO_URI = 'mongodb+srv://brownloon3:<example_psw>@cluster0.zfzdfwe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+>>NODE_ENV = 'production'
+>>JWT_SECRET = '4a670ee3c4e17b3348cf499a828a0c180685dbf241a3cc1cde88fa235615a2ba'
