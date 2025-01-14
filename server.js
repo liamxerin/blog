@@ -9,6 +9,8 @@ const flash = require('connect-flash')
 const cors = require("cors")
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 require('dotenv').config();
 
 app.set('view engine', 'ejs');
@@ -48,6 +50,16 @@ const PORT = process.env.PORT;
 // Serve static files from the "uploads" directory
 app.use('/uploads', express.static('uploads'));
 
+app.use(
+  session({
+    secret: 'mongo1223owdvkwdvkmewo0',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+    }),
+  })
+);
 
 // Connect to DB and start server
 mongoose.connect(process.env.MONGO_URI, {
