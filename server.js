@@ -29,12 +29,12 @@ const cookieParser = require('cookie-parser');
 // Log every request to the console
 
 app.use(cookieParser());
-app.use(session({
-    secret: 'secret',
-    cookie: { secure: false },
-    resave: false,
-    saveUninitialized: false
-}))
+// app.use(session({
+//     secret: 'secret',
+//     cookie: { secure: false },
+//     resave: false,
+//     saveUninitialized: false
+// }))
 
 app.use(flash());
 
