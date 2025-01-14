@@ -432,12 +432,9 @@ const adminSignup = async (req, res) => {
         generateTokenSetCookie(newUser._id, res);
         await newUser.save();
 
-        res.status(201).json({
-            _id: newUser._id,
-            username: newUser.username,
-            email: newUser.email,
-            profilePic: newUser.profilePic,
-        });
+       if(newUser){
+        return res.redirect('login-page');
+       }
        
     } catch (error) {
         console.log("Error in signup controller", error.message);
