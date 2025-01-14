@@ -13,7 +13,7 @@ build/
 Thumbs.db
 
 # Environment variables
-.env
+# .env
 
 # IDE specific files
 .vscode/
