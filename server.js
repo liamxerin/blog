@@ -9,6 +9,7 @@ const flash = require('connect-flash')
 const cors = require("cors")
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const MongoStore = require('connect-mongo');
 require('dotenv').config();
 
 app.set('view engine', 'ejs');
