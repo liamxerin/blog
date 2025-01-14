@@ -7,13 +7,54 @@
     <link rel="icon" type="image/png" href="/logo.png">
     <link rel="stylesheet" href="home.css">
 </head>
+<style>
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 5px;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    .skeleton-image {
+      width: 80%;
+      height: 200px;
+      margin-bottom: 15px;
+    }
+
+    .skeleton-text {
+      width: 60%;
+      height: 20px;
+      margin-bottom: 10px;
+    }
+
+    .skeleton-button {
+      width: 100px;
+      height: 40px;
+    }
+</style>
 <body>
     <%- include('./components/navbar') %>
     
     <!-- Headsection with main post -->
-    <div class="headsection">
+    <div class="skeleton-container" id="skeleton-loader">
+        <div class="skeleton skeleton-image"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text" style="width: 40%;"></div>
+        <div class="skeleton skeleton-button"></div>
+      </div>
+    
+    <div class="headsection" >
         <% if (mainPost) { %>
-            <div class="headpost">
+            <div class="headpost" id="content">
                 <div class="headimage">
                     <img src="/<%= mainPost.image %>" alt="Image for <%= mainPost.title %>" />
                     <div class="headtext">
@@ -91,4 +132,32 @@
         <% } %>
     </div>
 </body>
+<script>
+       document.addEventListener("DOMContentLoaded", () => {
+      const skeletonLoader = document.getElementById("skeleton-loader");
+      const content = document.getElementById("content");
+
+      // Measure page loading speed using Performance API
+      const checkPageLoadSpeed = () => {
+        // Check the time it takes to load the page
+        const loadTime = performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart;
+
+        // If the load time is slow (threshold in milliseconds, e.g., 2000 ms), keep skeleton visible longer
+        const threshold = 2000; // Adjust threshold for "slow speed"
+        if (loadTime > threshold) {
+          setTimeout(() => {
+            skeletonLoader.style.display = "none";
+            content.style.display = "block";
+          }, 1000); // Add an extra delay if slow
+        } else {
+          // If fast, hide the skeleton immediately
+          skeletonLoader.style.display = "none";
+          content.style.display = "block";
+        }
+      };
+
+      // Wait for the window load event to ensure all assets are loaded
+      window.addEventListener("load", checkPageLoadSpeed);
+    });
+</script>
 </html>

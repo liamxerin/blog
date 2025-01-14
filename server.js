@@ -54,6 +54,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
+
 .then(() => {
   app.listen(PORT, () => {
     console.log("Database connected. Listening on port:", PORT);
@@ -62,3 +63,5 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch((error) => {
   console.log("Database connection error:", error);
 });
+
+// to start project, type 'npm run dev' in terminal
