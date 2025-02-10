@@ -1,6 +1,6 @@
 const express = require('express');
-const adminRoutes = require('../../routes/adminRouters');
-const pageRoutes = require('../../routes/pageRouters');
+const adminRoutes = require('./routes/adminRouters');
+const pageRoutes = require('./routes/pageRouters');
 const serverless = require('serverless-http');
 const path = require('path');
 const app = express();
@@ -75,5 +75,5 @@ mongoose
     console.error('Database connection error:', error);
   });
 
-  module.exports.handler = serverless(app);
+
 // To start the project, run `npm run dev` in the terminal
