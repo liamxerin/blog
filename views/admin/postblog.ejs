@@ -177,90 +177,90 @@
         </div>
     </div>
     <script>
-    let isPublishing = false;
+//     let isPublishing = false;
 
-// Set the isPublishing flag based on the button clicked
-function setPublishing(publishing) {
-  isPublishing = publishing;
-}
+// // Set the isPublishing flag based on the button clicked
+// function setPublishing(publishing) {
+//   isPublishing = publishing;
+// }
 
-// Event listener to handle user leaving the page
-window.addEventListener('beforeunload', function (event) {
-  if (!isPublishing && isDataChanged()) {
-    saveDraftData();
-    const confirmationMessage = "Your changes are not saved. Do you really want to leave?";
-    event.returnValue = confirmationMessage;
-    return confirmationMessage; // Required for some browsers
-  }
-});
+// // Event listener to handle user leaving the page
+// window.addEventListener('beforeunload', function (event) {
+//   if (!isPublishing && isDataChanged()) {
+//     saveDraftData();
+//     const confirmationMessage = "Your changes are not saved. Do you really want to leave?";
+//     event.returnValue = confirmationMessage;
+//     return confirmationMessage; // Required for some browsers
+//   }
+// });
 
-// Check if any form data has been modified
-function isDataChanged() {
-  const { title, content, description } = collectFormData();
-  return title.trim() !== '' || content.trim() !== '' || description.trim() !== '';
-}
+// // Check if any form data has been modified
+// function isDataChanged() {
+//   const { title, content, description } = collectFormData();
+//   return title.trim() !== '' || content.trim() !== '' || description.trim() !== '';
+// }
 
-// Collect form data from input fields
-function collectFormData() {
-  const title = document.getElementById('title')?.value || '';
-  const author = document.getElementById('author')?.value || '';
-  const category = document.getElementById('categories')?.value || '';
-  const image = document.getElementById('image-upload')?.files[0] || null;
-  const description = document.getElementById('description')?.value || '';
-  const content = document.getElementById('content')?.value || '';
-  const tags = document.getElementById('tags')?.value || '';
-  const postType = document.getElementById('postType')?.value || '';
+// // Collect form data from input fields
+// function collectFormData() {
+//   const title = document.getElementById('title')?.value || '';
+//   const author = document.getElementById('author')?.value || '';
+//   const category = document.getElementById('categories')?.value || '';
+//   const image = document.getElementById('image-upload')?.files[0] || null;
+//   const description = document.getElementById('description')?.value || '';
+//   const content = document.getElementById('content')?.value || '';
+//   const tags = document.getElementById('tags')?.value || '';
+//   const postType = document.getElementById('postType')?.value || '';
 
-  return {
-    title,
-    author,
-    category,
-    image,
-    description,
-    content,
-    tags,
-    postType
-  };
-}
+//   return {
+//     title,
+//     author,
+//     category,
+//     image,
+//     description,
+//     content,
+//     tags,
+//     postType
+//   };
+// }
 
-// Save draft data to the server
-async function saveDraftData() {
-  const data = collectFormData();
-  const formData = new FormData();
+// // Save draft data to the server
+// async function saveDraftData() {
+//   const data = collectFormData();
+//   const formData = new FormData();
 
-  // Append all fields to FormData
-  Object.keys(data).forEach((key) => {
-    if (data[key]) {
-      formData.append(key, data[key]);
-    }
-  });
+//   // Append all fields to FormData
+//   Object.keys(data).forEach((key) => {
+//     if (data[key]) {
+//       formData.append(key, data[key]);
+//     }
+//   });
 
-  try {
-    const response = await fetch('http://localhost:5000/admin/saveDraft', {
-      method: 'POST',
-      body: formData
-    });
+//   try {
+//     const response = await fetch('http://localhost:5000/admin/saveDraft', {
+//       method: 'POST',
+//       body: formData
+//     });
 
-    if (!response.ok) {
-      throw new Error("Server error while saving draft");
-    }
+//     if (!response.ok) {
+//       throw new Error("Server error while saving draft");
+//     }
 
-    const responseData = await response.json();
-    console.log('Draft saved successfully:', responseData);
-  } catch (error) {
-    console.error('Error saving draft:', error);
-  }
-}
+//     const responseData = await response.json();
+//     console.log('Draft saved successfully:', responseData);
+//   } catch (error) {
+//     console.error('Error saving draft:', error);
+//   }
+// }
 
-// Clear input values on focus
-document.addEventListener("DOMContentLoaded", function () {
-  const fieldsToClear = document.querySelectorAll(".clear-on-focus");
-  fieldsToClear.forEach((field) => {
-    field.addEventListener("focus", function () {
-      this.value = ""; // Clear value on focus
-    });
-  });
-});
+// // Clear input values on focus
+// document.addEventListener("DOMContentLoaded", function () {
+//   const fieldsToClear = document.querySelectorAll(".clear-on-focus");
+//   fieldsToClear.forEach((field) => {
+//     field.addEventListener("focus", function () {
+//       this.value = ""; // Clear value on focus
+//     });
+//   });
+// });
 
     </script>
     </body>
