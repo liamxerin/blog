@@ -1,0 +1,6 @@
+[build]
+  functions = "netlify/functions"  # Path to the folder where serverless functions are stored
+  publish = "public"               # Folder for static files (if any)
+
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
