@@ -260,7 +260,7 @@ const getMessage = async( req, res) =>{
 const postBlog = async(req,res) =>{
     try {
         const draftCount = await BlogPost.countDocuments({ status: "draft" });
-        res.render('admin/postBlog', { draftCount, message: req.flash('message')});
+        res.render('admin/postblog', { draftCount, message: req.flash('message')});
     } catch (error) {
         console.error("Error rendering postBLog:", error);
         res.status(500).send("An error occurred while loading the dashboard.");
