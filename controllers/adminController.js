@@ -395,7 +395,7 @@ const signupPage = async (req, res)=>{
         console.log("Error in admin login controller", error.message);
         req.flash('error', 'Login failed. Please try again.');
         res.redirect('login-page');
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: "Opps!,Internal Server Error1" });
     }
 };
 const adminSignup = async (req, res) => {
@@ -438,7 +438,7 @@ const adminSignup = async (req, res) => {
        
     } catch (error) {
         console.log("Error in signup controller", error.message);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: "Internal Server Error2" });
     }
 };
 
@@ -451,7 +451,7 @@ const adminLogout = async (req,res)=>{
 
     }catch(error){
         console.log("Error in log out controller",  error.message)
-        res.status(500).json({error: "Internal server error"})
+        res.status(500).json({error: "Internal server error3"})
     }
 
 }
