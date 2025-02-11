@@ -36,24 +36,24 @@ router.post('/signup', adminSignup);
 router.post('/login', adminLogin);
 
 // Protected routes
-router.use(protectedRoute); // Apply middleware to all routes below this line
+// router.use(protectedRoute); // Apply middleware to all routes below this line
 
-router.get('/home', home);
-router.get('/dashboard', dashboard);
-router.get('/postBlog', postBlog);
-router.get('/profilePage', profilePage);
-router.get('/messages', getMessage);
-router.get('/blogs', getAllBlogs);
-router.get('/drafts', getAllDraft);
-router.get('/updatePage/:id', updatePage);
-router.get('/searchPage', searchPage);
+router.get('/home',protectedRoute, home);
+router.get('/dashboard',protectedRoute, dashboard);
+router.get('/postBlog',protectedRoute, postBlog);
+router.get('/profilePage',protectedRoute, profilePage);
+router.get('/messages',protectedRoute, getMessage);
+router.get('/blogs',protectedRoute, getAllBlogs);
+router.get('/drafts',protectedRoute, getAllDraft);
+router.get('/updatePage/:id',protectedRoute, updatePage);
+router.get('/searchPage',protectedRoute, searchPage);
 
 router.post('/createPost', upload.single('image'), createPost);
-router.post('/saveDraft', upload.single('image'), saveDraft);
-router.patch('/updateBlog/:id', upload.single('image'), updateBlog);
-router.delete('/deleteBlog/:id', deleteBlog);
-router.delete('/deleteMessage/:id', deleteMessage);
-router.post('/deleteMessageCollection/:collectionName', deleteMessageCollection);
+router.post('/saveDraft', protectedRoute,upload.single('image'), saveDraft);
+router.patch('/updateBlog/:id',protectedRoute, upload.single('image'), updateBlog);
+router.delete('/deleteBlog/:id',protectedRoute, deleteBlog);
+router.delete('/deleteMessage/:id', protectedRoute,deleteMessage);
+router.post('/deleteMessageCollection/:collectionName',protectedRoute, deleteMessageCollection);
 router.post('/logout', adminLogout);
 
 module.exports = router; // Export the router
